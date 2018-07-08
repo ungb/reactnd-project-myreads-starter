@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import Book from './components/Book'
 import BookShelf from './components/BookShelf'
@@ -60,42 +60,35 @@ class BooksApp extends React.Component {
       },
 
     ],
-
-
-
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
-    showSearchPage: false
   }
-
+  searchForBooks(text)
+  {
+    return BooksAPI.search(text)
+  }
   render() {
-    console.log(BooksAPI.search('Android'))
-
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
-          <Search />
-        ) : (
-          <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
-            <div className="list-books-content">
-              <div>
-                <BookShelf name='Currently Reading' books={this.state.currentlyReading} selectedValue='currentlyReading'/>
-                <BookShelf name='Want to Read' books={this.state.wantToRead} selectedValue='wantToRead'/>
-                <BookShelf name='Read' books={this.state.read} selectedValue='read'/>
+          <Route exact path="/" render={() => (
+            <div className="list-books">
+              <div className="list-books-title">
+                <h1>MyReads</h1>
+              </div>
+              <div className="list-books-content">
+                <div>
+                  <BookShelf name='Currently Reading' books={this.state.currentlyReading} selectedValue='currentlyReading'/>
+                  <BookShelf name='Want to Read' books={this.state.wantToRead} selectedValue='wantToRead'/>
+                  <BookShelf name='Read' books={this.state.read} selectedValue='read'/>
+                </div>
+              </div>
+              <div className="open-search">
+                <Link to="/search">Add a book</Link>
               </div>
             </div>
-            <div className="open-search">
-              <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
-            </div>
-          </div>
-        )}
+          )} />
+          <Route path="/search" render={()=> (
+            <Search searchAPI={this.searchForBooks} />
+          )}/>
+
       </div>
     )
   }
