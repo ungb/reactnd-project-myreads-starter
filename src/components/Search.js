@@ -4,18 +4,29 @@ import SearchResults from './SearchResults'
 import { Link } from 'react-router-dom'
 import QueryString from 'query-string'
 
+/**
+* @description Represents the Search react component
+*/
 class Search extends Component {
   static propTypes = {
-    searchAPI: PropTypes.func.isRequired
+    searchAPI: PropTypes.func.isRequired,
+    updateShelf: PropTypes.func.isRequired
   }
+
   state = {
     searchTerm: '',
     searchResults: []
   }
+
   componentDidMount()
   {
     this.updateSearch(QueryString.parse(this.props.location.search).q)
   }
+
+  /**
+  * @description update the search state.
+  * @param {string} text - text that is being searched.
+  */
   updateSearch(text){
     this.setState(prevState => ({
       searchTerm: text
@@ -37,14 +48,6 @@ class Search extends Component {
         <div className="search-books-bar">
         <Link className="close-search" to="/">Close</Link>
           <div className="search-books-input-wrapper">
-            {/*
-              NOTES: The search from BooksAPI is limited to a particular set of search terms.
-              You can find these search terms here:
-              https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-
-              However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-              you don't find a specific author or title. Every search is limited by search terms.
-            */}
             <input
               type="text"
               placeholder="Search by title or author"

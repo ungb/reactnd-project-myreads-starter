@@ -6,6 +6,9 @@ import Search from './components/Search'
 
 import './App.css'
 
+/**
+* @description Book React Application
+*/
 class BooksApp extends React.Component {
 
   state = {
@@ -19,6 +22,9 @@ class BooksApp extends React.Component {
     this.update();
   }
 
+  /**
+  * @description Update the book shelve from backend by grabbing all the books again.
+  */
   update = () => {
     BooksAPI.getAll().then(books => {
         this.setState({
@@ -28,12 +34,21 @@ class BooksApp extends React.Component {
         })
     })
   }
+
+  /**
+  * @description Update the Shelves
+  * @param {object} book - book Object to update
+  * @param {string} shelf - shelf to add book to.
+  */
   updateShelf = (book, shelf) => {
     BooksAPI.update(book, shelf).then(shelves => {
       this.update();
     })
   }
-
+  /**
+  * @description Search for a book
+  * @param {string} text - text to search for
+  */
   searchForBooks = (text) => {
     return BooksAPI.search(text)
   }

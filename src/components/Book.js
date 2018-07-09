@@ -2,24 +2,32 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import BookShelfChanger from './BookShelfChanger'
 
+/**
+* @description Represents a book react component
+*/
 class Book extends Component {
   static propType = {
     book: PropTypes.object.isRequired,
     selectedValue: PropTypes.string.isRequired
   }
 
+  /**
+  * @description Attempt to get the book imageURl, or return a not found image.
+  * @param {object} book - A book object that contains the image url.
+  */
   getImageUrl(book){
-    if(typeof book.author === 'undefined'){
       return typeof book.imageLinks === 'undefined' ? 'http://www.azcounties.org/images/pages/N193/No%20found%20photo.png' : book.imageLinks.thumbnail;
-    }
-    return book.bookCoverImageUrl
   }
+
+
+  /**
+  * @description get the author(s) of the book. If more than 1 will join them.
+  * @param {object} book - A book object that contains the image url.
+  */
   getAuthors(book){
-    if(typeof book.author === 'undefined'){
-      return typeof book.authors === 'undefined' ? 'No Author Found' : book.authors.join('\n')
-    }
-      return book.author
+      return typeof book.authors === 'undefined' ? 'No Author Found' : book.authors.join(', ')
   }
+
   render() {
     const {selectedValue, book } = this.props
     return (
