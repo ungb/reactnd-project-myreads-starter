@@ -1,24 +1,20 @@
 import React, { Component } from 'react'
 import Book from './Book'
 
-class SearchResults extends Component {
 
 
-
-  render(){
-    const { results } = this.props;
+const SearchResults = (props) => {
+    const { results, updateShelf } = props;
     return (
       <div className="search-books-results">
         <ol className="books-grid">
-          {typeof results != 'undefined' && results.constructor === Array &&
+          {typeof results !== 'undefined' && results.constructor === Array &&
           results.map(book => (
-            <Book key={book.id} selectedValue='none' book={book} />
+            <Book key={book.id} selectedValue='none' book={book} updateShelf={updateShelf} />
           ))}
         </ol>
       </div>
     )
-  }
-
 }
 
 export default SearchResults;

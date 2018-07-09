@@ -10,6 +10,7 @@ class BookShelf extends Component {
     books: PropTypes.array.isRequired,
     selectedValue: PropTypes.string.isRequired,
   }
+
   render (){
     const { name, books, selectedValue } = this.props
     return (
@@ -18,7 +19,7 @@ class BookShelf extends Component {
         <div className="bookshelf-books">
           <ol className="books-grid">
             {books.map(book => (
-              <Book key={book.id} selectedValue={selectedValue} book={book} />
+              <Book key={book.id} book={book} selectedValue={selectedValue} updateShelf={this.props.updateShelf}/>
             ))}
           </ol>
         </div>

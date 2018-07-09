@@ -1,14 +1,21 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import SearchResults from './SearchResults'
-import { Route, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import QueryString from 'query-string'
 
 class Search extends Component {
+  static propTypes = {
+    searchAPI: PropTypes.func.isRequired
+  }
   state = {
     searchTerm: '',
     searchResults: []
   }
-
+  componentDidMount()
+  {
+    this.updateSearch(QueryString.parse(this.props.location.search).q)
+  }
   updateSearch(text){
     this.setState(prevState => ({
       searchTerm: text
@@ -19,15 +26,12 @@ class Search extends Component {
       })
     }
     else {
-      this.props.searchAPI(this.state.searchTerm)
+      this.props.searchAPI(text)
         .then(res => this.setState({ searchResults: res }) )
     }
   }
 
   render(){
-    console.log(this.state.searchTerm);
-    console.log(this.state.searchResults);
-
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -49,7 +53,7 @@ class Search extends Component {
             />
           </div>
         </div>
-        <SearchResults results={this.state.searchResults} />
+        <SearchResults results={this.state.searchResults} updateShelf={this.props.updateShelf}/>
       </div>
     )
   }
