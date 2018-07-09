@@ -15,7 +15,7 @@ class Book extends Component {
   * @description Attempt to get the book imageURl, or return a not found image.
   * @param {object} book - A book object that contains the image url.
   */
-  getImageUrl(book){
+  getImageUrl = (book) => {
       return typeof book.imageLinks === 'undefined' ? 'http://www.azcounties.org/images/pages/N193/No%20found%20photo.png' : book.imageLinks.thumbnail;
   }
 

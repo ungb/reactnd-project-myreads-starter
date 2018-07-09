@@ -26,7 +26,7 @@ class BookShelfChanger extends Component {
   * @param {string} value - value can be currentlyReading, wantToRead, read, none
   * @param {function} updateShelf - the callback method to update the shelf.
   */
-  handleChange(book, value, updateShelf) {
+  handleChange = (book, value, updateShelf) => {
     this.setState({value: value});
     updateShelf(book, value)
   }

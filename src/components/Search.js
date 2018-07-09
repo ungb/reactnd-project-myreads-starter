@@ -27,7 +27,7 @@ class Search extends Component {
   * @description update the search state.
   * @param {string} text - text that is being searched.
   */
-  updateSearch(text){
+  updateSearch = (text) => {
     this.setState(prevState => ({
       searchTerm: text
     }))
