@@ -32,13 +32,25 @@ class Search extends Component {
     this.setState(prevState => ({
       searchTerm: text
     }))
+
     this.props.searchAPI(text)
-      .then(res => this.setState({ searchResults: res }))
+    .then(results => {
+      if (results && results.constructor === Array){
+        results.forEach(result => {
+          const shelfFromBooks = this.props.books.filter(book => book.id === result.id);
+          result.shelf = shelfFromBooks.length === 0 ? 'none' :  shelfFromBooks[0].shelf
+        })
+        this.setState({ searchResults: results })
+      }
+      else {
+        this.setState({ searchResults: [] })
+
+      }
+    })
   }
 
 
   render(){
-
     return (
       <div className="search-books">
         <div className="search-books-bar">

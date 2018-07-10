@@ -22,7 +22,7 @@ const SearchResults = (props) => {
 }
 
 SearchResults.propTypes = {
-  results: PropTypes.array.isRequired,
+  results: PropTypes.array,
   updateShelf: PropTypes.func.isRequired
 }
 

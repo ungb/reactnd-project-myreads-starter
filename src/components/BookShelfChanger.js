@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 */
 class BookShelfChanger extends Component {
   static propTypes = {
-    selectedValue: PropTypes.string.isRequired
+    selectedValue: PropTypes.string
   }
 
   state ={
