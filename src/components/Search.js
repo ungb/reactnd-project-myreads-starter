@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import SearchResults from './SearchResults'
 import { Link } from 'react-router-dom'
 import QueryString from 'query-string'
+import {DebounceInput} from 'react-debounce-input';
 
 /**
 * @description Represents the Search react component
@@ -31,25 +32,21 @@ class Search extends Component {
     this.setState(prevState => ({
       searchTerm: text
     }))
-    if (text === ''){
-      this.setState({
-        searchResults:[]
-      })
-    }
-    else {
-      this.props.searchAPI(text)
-        .then(res => this.setState({ searchResults: res }) )
-    }
+    this.props.searchAPI(text)
+      .then(res => this.setState({ searchResults: res }))
   }
 
+
   render(){
+
     return (
       <div className="search-books">
         <div className="search-books-bar">
         <Link className="close-search" to="/">Close</Link>
           <div className="search-books-input-wrapper">
-            <input
+            <DebounceInput
               type="text"
+              debounceTimeout={300}
               placeholder="Search by title or author"
               value={this.state.searchTerm}
               onChange={(event) => this.updateSearch(event.target.value)}
