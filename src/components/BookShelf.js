@@ -13,7 +13,7 @@ class BookShelf extends Component {
   }
 
   render (){
-    const { name, books, selectedValue } = this.props
+    const { name, books } = this.props
     return (
       <div className="bookshelf">
         <h2 className="bookshelf-title">{name}</h2>

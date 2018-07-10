@@ -29,7 +29,7 @@ class Book extends PureComponent {
   }
 
   render() {
-    const {selectedValue, book } = this.props
+    const { book } = this.props
     return (
       <li>
         <div className="book">
