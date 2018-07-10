@@ -2,7 +2,7 @@
 
 A React application that allows people to search for books and mark them as read, currently reading or want to read.  
 
-## Contributing
+## Installation
 
 Clone this repo and make sure you have node and npm install.  Once those are setup, run the following on your terminal:
 
