@@ -16,7 +16,7 @@ class Book extends PureComponent {
   * @param {object} book - A book object that contains the image url.
   */
   getImageUrl = (book) => {
-      return typeof book.imageLinks === 'undefined' ? 'http://www.azcounties.org/images/pages/N193/No%20found%20photo.png' : book.imageLinks.thumbnail;
+      return typeof book.imageLinks === 'undefined' ? '' : book.imageLinks.thumbnail;
   }
 
 
